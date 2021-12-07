@@ -11,7 +11,7 @@ class DoublyLinkedList {
     this.length = 1;
   }
   append(value) {
-     const newNode = {
+    const newNode = {
       value: value,
       next: null,
       prev: null,
@@ -38,25 +38,25 @@ class DoublyLinkedList {
   printList() {
     const array = [];
     let currentNode = this.head;
-    while(currentNode !== null){
-        array.push(currentNode.value)
-        currentNode = currentNode.next
+    while (currentNode !== null) {
+      array.push(currentNode.value)
+      currentNode = currentNode.next
     }
     return array;
   }
-  insert(index, value){
+  insert(index, value) {
     //Check for proper parameters;
-    if(index >= this.length) {
+    if (index >= this.length) {
       console.log('yes')
       return this.append(value);
     }
-    
+
     const newNode = {
       value: value,
       next: null,
       prev: null,
     }
-    const leader = this.traverseToIndex(index-1);
+    const leader = this.traverseToIndex(index - 1);
     const follower = leader.next;
     // leader points to new node
     leader.next = newNode;
@@ -73,7 +73,7 @@ class DoublyLinkedList {
     //Check parameters
     let counter = 0;
     let currentNode = this.head;
-    while(counter !== index){
+    while (counter !== index) {
       currentNode = currentNode.next;
       counter++;
     }
@@ -81,7 +81,7 @@ class DoublyLinkedList {
   }
   remove(index) {
     // Check Parameters      
-    const leader = this.traverseToIndex(index-1);
+    const leader = this.traverseToIndex(index - 1);
     const unwantedNode = leader.next;
     leader.next = unwantedNode.next;
     this.length--;
@@ -89,7 +89,23 @@ class DoublyLinkedList {
   }
 
   reverse() {
-    
+    // if there is only one head element
+    if (!this.head.next) {
+      return this.head;
+    }
+    let first = this.head;
+    this.tail = this.head;
+    let second = first.next;
+    // while second.next is not null
+    while(second) {
+      const temp = second.next;
+      second.next = first;
+      first = second;
+      second = temp;
+    }
+    this.head.next = null;;
+    this.head = first;
+    return this.printList();
   }
 
 }
@@ -107,8 +123,8 @@ myLinkedList.append(5);
 myLinkedList.append(16);
 myLinkedList.prepend(1);
 myLinkedList.insert(2, 99);
-// myLinkedList.insert(20, 88);
-// myLinkedList.remove(2);
-
-
-
+myLinkedList.insert(20, 88);
+myLinkedList.printList();
+myLinkedList.remove(2);
+myLinkedList.remove(2);
+myLinkedList.reverse();
