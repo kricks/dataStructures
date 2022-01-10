@@ -5,16 +5,16 @@
 
 //For example: fibonacciRecursive(6) should return 8
 
-function fibonacciIterative(n){
+function fibonacciIterative(n){ // O(n)
   let sum = [0,1];
-  for (let i = 2; i <= 100; i++) {
+  for (let i = 2; i < n + 1; i++) {
     sum.push(sum[i-1] + sum[i-2]);
   }
   return sum[n];
 }
 fibonacciIterative(10);
 
-function fibonacciRecursive(n) {
+function fibonacciRecursive(n) { // O(2^n)
   if (n < 2) {
     return n;
   }
